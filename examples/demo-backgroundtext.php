@@ -12,7 +12,7 @@
 <?php
 require_once 'HTML/QuickForm2.php';
 require_once 'HTML/QuickForm2/Renderer.php';
-require_once 'BackgroundText.php';
+require_once '../HTML/QuickForm2/Element/BackgroundText.php';
 
 HTML_QuickForm2_Factory::registerElement(
     'backgroundtext',
@@ -49,10 +49,6 @@ if ($form->validate()) {
 $renderer = HTML_QuickForm2_Renderer::factory('default');
 echo $form->render($renderer);
 ?>
-  <ul>
-   <li><a href="BackgroundText.phps">BackgroundText source</a></li>
-   <li><a href="demo-backgroundtext.phps">demo source</a></li>
-  </ul>
   <p>
    Try to type in the exact text and submit it - it will still be distinguished
    from the default one: 'Type your search terms here'.
