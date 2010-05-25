@@ -12,7 +12,7 @@
 <?php
 require_once 'HTML/QuickForm2.php';
 require_once 'HTML/QuickForm2/Renderer.php';
-require_once '../HTML/QuickForm2/Element/BackgroundText.php';
+require_once '../../HTML/QuickForm2/Element/BackgroundText.php';
 
 HTML_QuickForm2_Factory::registerElement(
     'backgroundtext',
