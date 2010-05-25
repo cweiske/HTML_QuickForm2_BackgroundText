@@ -1,3 +1,15 @@
+/**
+ * HTML_QuickForm2_BackgroundText example.
+ *
+ * PHP version 5
+ *
+ * @category HTML
+ * @package  HTML_QuickForm2_BackgroundText
+ * @author   Christian Weiske <cweiske@php.net>
+ * @license  http://www.gnu.org/copyleft/lesser.html LGPL License
+ * @version  SVN: $Id: InputText.php 294057 2010-01-26 21:10:28Z avb $
+ * @link     http://pear.php.net/package/HTML_QuickForm2_BackgroundText
+ */
 <?xml version="1.0" encoding="utf-8"?>
 <html>
  <head>
