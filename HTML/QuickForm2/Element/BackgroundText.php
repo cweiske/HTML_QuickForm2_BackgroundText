@@ -99,7 +99,7 @@ class HTML_QuickForm2_Element_BackgroundText
      * for the rendering process.
      *
      * @return void
-     */    
+     */
     protected function btUpdateAttributes()
     {
         if ($this->btText == '') {
@@ -160,6 +160,21 @@ class HTML_QuickForm2_Element_BackgroundText
                 return;
             }
         }
+    }
+
+
+
+    /**
+     * Returns the rendered HTML element.
+     * Updates the background text attributes before rendering.
+     *
+     * @return string HTML code
+     */
+    public function __toString()
+    {
+        $this->btUpdateAttributes();
+
+        return parent::__toString();
     }
 
 
