@@ -1,7 +1,7 @@
 <?php
 require_once 'HTML/QuickForm2.php';
 require_once 'HTML/QuickForm2/Renderer.php';
-require_once '../HTML/QuickForm2/Element/BackgroundText.php';
+require_once dirname(__FILE__) . '/../HTML/QuickForm2/Element/BackgroundText.php';
 
 class HTML_QuickForm2_Element_BackgroundTextTest extends PHPUnit_Framework_TestCase
 {
@@ -43,6 +43,8 @@ class HTML_QuickForm2_Element_BackgroundTextTest extends PHPUnit_Framework_TestC
         $this->assertNotContains('foo', $s);
     }
 
+
+
     public function testSetBackgroundClassWithoutText()
     {
         $this->bt->setBackgroundClass('foo-background');
@@ -68,6 +70,41 @@ class HTML_QuickForm2_Element_BackgroundTextTest extends PHPUnit_Framework_TestC
         $this->bt->setBackgroundText(null);
         $s = (string)$this->bt;
         $this->assertNotContains('foo-background', $s);
+    }
+
+
+
+    public function testSetInvisibleChar()
+    {
+        $this->bt->setInvisibleChar('!foo!');
+        $this->bt->setBackgroundText('bar');
+        $s = (string)$this->bt;
+        $this->assertContains('!foo!', $s);
+    }
+
+    public function testSetInvisibleCharNull()
+    {
+        $this->bt->setInvisibleChar(null);
+        $this->bt->setBackgroundText('bar');
+        $s = (string)$this->bt;
+        $this->assertContains('value="bar"', $s);
+    }
+
+    public function testSetInvisibleCharEmptyString()
+    {
+        $this->bt->setInvisibleChar('');
+        $this->bt->setBackgroundText('bar');
+        $s = (string)$this->bt;
+        $this->assertContains('value="bar"', $s);
+    }
+
+    public function testSetInvisibleCharAfterText()
+    {
+        $this->bt->setInvisibleChar('!foo!');
+        $this->bt->setBackgroundText('bar');
+        $this->bt->setInvisibleChar('!foz!');
+        $s = (string)$this->bt;
+        $this->assertContains('!foz!', $s);
     }
 
 

@@ -66,7 +66,7 @@ class HTML_QuickForm2_Element_BackgroundText
      *
      * @param string $text Background text to set
      *
-     * @return SemanticScuttle_QuickForm2_BackgroundText This object
+     * @return HTML_QuickForm2_BackgroundText This object
      */
     public function setBackgroundText($text)
     {
@@ -92,13 +92,35 @@ class HTML_QuickForm2_Element_BackgroundText
 
 
     /**
+     * Set the invisible char that is used to distinguish
+     * between text written by users and the background text.
+     *
+     * Some browsers display the invisible char, so you might want
+     * to disable it.
+     *
+     * @param string $char Invisible char
+     *
+     * @return HTML_QuickForm2_Element_BackgroundText This object
+     */
+    public function setInvisibleChar($char)
+    {
+        $btText = substr($this->btText, 0, -strlen($this->btInvisibleChar));
+        $this->btInvisibleChar = $char;
+        if ($btText) {
+            $this->setBackgroundText($btText);
+        }
+    }
+
+
+
+    /**
      * Sets the HTML class to use when the text element is
      * empty and not focused
      *
      * @param string $class HTML class to set when the element
      *                      is not focused
      *
-     * @return SemanticScuttle_QuickForm2_BackgroundText This object
+     * @return HTML_QuickForm2_BackgroundText This object
      */
     public function setBackgroundClass($class)
     {
