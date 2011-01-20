@@ -50,6 +50,14 @@ class HTML_QuickForm2_Element_BackgroundText
      */
     protected $btClass = null;
 
+    /**
+     * Invisible character to distiguish user content from
+     * our default background text.
+     *
+     * @var string
+     */
+    protected $btInvisibleChar = "\342\201\243";
+
 
 
     /**
@@ -62,13 +70,20 @@ class HTML_QuickForm2_Element_BackgroundText
      */
     public function setBackgroundText($text)
     {
-        //we add a invisible separator character to distiguish
-        // user content from our default text
-        $this->btText = $text . "\342\201\243";
+        //clear out old background text from value
         if (isset($this->attributes['value'])
             && $this->attributes['value'] == $this->btText
         ) {
             $this->attributes['value'] = '';
+            $this->attributes['class'] = '';
+        }
+
+        //we add a invisible separator character to distiguish
+        // user content from our default text
+        if ($text != '') {
+            $this->btText = $text . $this->btInvisibleChar;
+        } else {
+            $this->btText = null;
         }
 
         return $this;
@@ -173,27 +188,7 @@ class HTML_QuickForm2_Element_BackgroundText
     public function __toString()
     {
         $this->btUpdateAttributes();
-
         return parent::__toString();
-    }
-
-
-
-    /**
-     * Renders the element using the given renderer.
-     * Automatically sets the background CSS class if the value
-     * is the background text.
-     *
-     * @param HTML_QuickForm2_Renderer $renderer Renderer instance
-     *
-     * @return HTML_QuickForm2_Renderer
-     */
-    public function render(HTML_QuickForm2_Renderer $renderer)
-    {
-        $this->btUpdateAttributes();
-
-        $renderer->renderElement($this);
-        return $renderer;
     }
 }
 ?>
