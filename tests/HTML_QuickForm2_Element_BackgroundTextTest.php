@@ -142,6 +142,73 @@ class HTML_QuickForm2_Element_BackgroundTextTest extends PHPUnit_Framework_TestC
     }
 
 
+
+    public function testDetectBrokenBrowsersNoAgent()
+    {
+        unset($_SERVER['HTTP_USER_AGENT']);
+        $bt = new HTML_QuickForm2_Element_BackgroundText();
+        $bt->setBackgroundText('foo');
+        $s = (string)$bt;
+        $this->assertContains('"foo', $s);
+        $this->assertNotContains('"foo"', $s);
+    }
+
+    public function testDetectBrokenBrowsersGoodAgent()
+    {
+        $_SERVER['HTTP_USER_AGENT'] = 'Opera/9.80 (X11; Linux i686; U; de)'
+            . ' Presto/2.7.62 Version/11.00';
+        $bt = new HTML_QuickForm2_Element_BackgroundText();
+        $bt->setBackgroundText('foo');
+        $s = (string)$bt;
+        $this->assertContains('"foo', $s);
+        $this->assertNotContains('"foo"', $s);
+    }
+
+    public function testDetectBrokenBrowsersBadAgents()
+    {
+        //IE6
+        $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/4.0 (compatible; MSIE 6.0)';
+        $bt = new HTML_QuickForm2_Element_BackgroundText();
+        $bt->setBackgroundText('foo');
+        $s = (string)$bt;
+        $this->assertContains('"foo"', $s);
+
+        //IE7
+        $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/4.0 (compatible; MSIE 7.0;'
+            . ' Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727;'
+            . '.NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0;'
+            . ' Tablet PC 2.0)';
+        $bt = new HTML_QuickForm2_Element_BackgroundText();
+        $bt->setBackgroundText('foo');
+        $s = (string)$bt;
+        $this->assertContains('"foo"', $s);
+
+        //IE8
+        $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/4.0 (compatible; MSIE 8.0;'
+            . ' Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 1.1.4322;'
+            . ' .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)';
+        $bt = new HTML_QuickForm2_Element_BackgroundText();
+        $bt->setBackgroundText('foo');
+        $s = (string)$bt;
+        $this->assertContains('"foo"', $s);
+    }
+
+    /**
+     * Test if deactivating the browser detection in the constructor works.
+     */
+    public function testDetectBrokenBrowsersDeactivate()
+    {
+        $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/4.0 (compatible; MSIE 8.0;'
+            . ' Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 1.1.4322;'
+            . ' .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)';
+        $bt = new HTML_QuickForm2_Element_BackgroundText(
+            'test', null, array('detectBrokenBrowsers' => false)
+        );
+        $bt->setBackgroundText('foo');
+        $s = (string)$bt;
+        $this->assertContains('"foo', $s);
+        $this->assertNotContains('"foo"', $s);
+    }
 }
 
 ?>

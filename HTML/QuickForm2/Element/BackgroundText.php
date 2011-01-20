@@ -27,6 +27,16 @@ require_once 'HTML/QuickForm2/Element/InputText.php';
  *   Name:   [John Doe   ]
  *   E-Mail: [|                             ]
  *
+ *  The pre-set "background text" is distinguished from user-inputted text
+ * with a special invisible character that gets appended to it.
+ * Even if the user writes the same text in the field as the background
+ * text, it gets detected as user input because of this special character.
+ *  Unfortunately, some broken browsers display this invisible char
+ * which does not look nice. The class automatically detects such broken
+ * browsers and removes the invisible character. To deactivate
+ * the browser detection, pass array('detectBrokenBrowsers' => false)
+ * as data parameter on element creation.
+ *
  * @category HTML
  * @package  HTML_QuickForm2_BackgroundText
  * @author   Christian Weiske <cweiske@php.net>
@@ -57,6 +67,30 @@ class HTML_QuickForm2_Element_BackgroundText
      * @var string
      */
     protected $btInvisibleChar = "\342\201\243";
+
+    /**
+     * Class constructor
+     *
+     * @param string $name       Element name
+     * @param mixed  $attributes Attributes (either a string or an array)
+     * @param array  $data       Element data (label, options and data
+     *                           used for element creation).
+     *                           Set 'detectBrokenBrowsers' to "false" to prevent
+     *                           automatic detection of broken browsers.
+     */
+    public function __construct($name = null, $attributes = null, $data = null)
+    {
+        $bDetect = true;
+        if (isset($data['detectBrokenBrowsers'])) {
+            $bDetect = (bool)$data['detectBrokenBrowsers'];
+            unset($data['detectBrokenBrowsers']);
+        }
+        parent::__construct($name, $attributes, $data);
+
+        if ($bDetect) {
+            $this->detectBrokenBrowsers();
+        }
+    }
 
 
 
@@ -196,6 +230,27 @@ class HTML_QuickForm2_Element_BackgroundText
                 $this->setValue($value);
                 return;
             }
+        }
+    }
+
+
+
+    /**
+     * Some browsers like the IE6, IE7 and IE8 display the invisible character.
+     * We simply remove the invisible char for them.
+     *
+     * @return void
+     */
+    protected function detectBrokenBrowsers()
+    {
+        if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+            return;
+        }
+        if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 8.')
+            || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.')
+            || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6.')
+        ) {
+            $this->setInvisibleChar(null);
         }
     }
 
