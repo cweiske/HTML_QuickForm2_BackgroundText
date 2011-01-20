@@ -1,3 +1,4 @@
+<?php
 /**
  * HTML_QuickForm2_BackgroundText example.
  *
@@ -10,6 +11,7 @@
  * @version  SVN: $Id: InputText.php 294057 2010-01-26 21:10:28Z avb $
  * @link     http://pear.php.net/package/HTML_QuickForm2_BackgroundText
  */
+?>
 <?xml version="1.0" encoding="utf-8"?>
 <html>
  <head>
