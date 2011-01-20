@@ -90,6 +90,25 @@ class HTML_QuickForm2_Element_BackgroundText
         if ($bDetect) {
             $this->detectBrokenBrowsers();
         }
+
+        $this->addFilter(array($this, 'filterBackgroundTextFromValue'));
+    }
+
+
+
+    /**
+     * Filters the background text from the value.
+     *
+     * @param string $value Raw value from i.e. POST data
+     *
+     * @return string Filtered value without background text.
+     */
+    public function filterBackgroundTextFromValue($value)
+    {
+        if ($value === $this->btText) {
+            $value = '';
+        }
+        return $value;
     }
 
 
@@ -104,6 +123,7 @@ class HTML_QuickForm2_Element_BackgroundText
      */
     public function setBackgroundText($text)
     {
+        var_dump('set');
         //clear out old background text from value
         if (isset($this->attributes['value'])
             && $this->attributes['value'] == $this->btText
@@ -207,29 +227,6 @@ class HTML_QuickForm2_Element_BackgroundText
 
         if ($this->attributes['value'] == $this->btText) {
             $this->attributes['class'] = $this->btClass;
-        }
-    }
-
-
-
-    /**
-     * Called when the element needs to update its value
-     * from form's data sources.
-     * This method overwrites the parent one to skip the background text
-     * values.
-     *
-     * @return void
-     */
-    protected function updateValue()
-    {
-        $name = $this->getName();
-        foreach ($this->getDataSources() as $ds) {
-            if (null !== ($value = $ds->getValue($name))
-                && $value !== $this->btText
-            ) {
-                $this->setValue($value);
-                return;
-            }
         }
     }
 
