@@ -123,7 +123,6 @@ class HTML_QuickForm2_Element_BackgroundText
      */
     public function setBackgroundText($text)
     {
-        var_dump('set');
         //clear out old background text from value
         if (isset($this->attributes['value'])
             && $this->attributes['value'] == $this->btText
