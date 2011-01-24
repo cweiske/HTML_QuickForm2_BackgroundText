@@ -232,7 +232,7 @@ class HTML_QuickForm2_Element_BackgroundText
 
 
     /**
-     * Some browsers like the IE6, IE7 and IE8 display the invisible character.
+     * Some browsers like the IE6, IE7, IE8 and IE9 display the invisible character.
      * We simply remove the invisible char for them.
      *
      * @return void
@@ -242,7 +242,8 @@ class HTML_QuickForm2_Element_BackgroundText
         if (!isset($_SERVER['HTTP_USER_AGENT'])) {
             return;
         }
-        if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 8.')
+        if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 9.')
+            || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 8.')
             || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.')
             || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6.')
         ) {
