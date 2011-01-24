@@ -11,11 +11,14 @@
  * @version  SVN: $Id: InputText.php 294057 2010-01-26 21:10:28Z avb $
  * @link     http://pear.php.net/package/HTML_QuickForm2_BackgroundText
  */
+header('Content-Type: application/xhtml+xml; charset=utf-8');
 ?>
 <?xml version="1.0" encoding="utf-8"?>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>HTML_QuickForm2_Element_BackgroundText demo</title>
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
   <style type="text/css">
 .inacttext {
   color: #888;
