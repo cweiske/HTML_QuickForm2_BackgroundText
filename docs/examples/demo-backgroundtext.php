@@ -29,7 +29,7 @@ header('Content-Type: application/xhtml+xml; charset=utf-8');
 <?php
 require_once 'HTML/QuickForm2.php';
 require_once 'HTML/QuickForm2/Renderer.php';
-require_once '../../HTML/QuickForm2/Element/BackgroundText.php';
+require_once __DIR__ . '/../../HTML/QuickForm2/Element/BackgroundText.php';
 
 HTML_QuickForm2_Factory::registerElement(
     'backgroundtext',
