@@ -246,6 +246,7 @@ class HTML_QuickForm2_Element_BackgroundText
             || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 8.')
             || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.')
             || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6.')
+            || false !== strpos($_SERVER['HTTP_USER_AGENT'], 'Safari')
         ) {
             $this->setInvisibleChar(null);
         }
