@@ -78,7 +78,7 @@ class HTML_QuickForm2_Element_BackgroundText
      *                           Set 'detectBrokenBrowsers' to "false" to prevent
      *                           automatic detection of broken browsers.
      */
-    public function __construct($name = null, $attributes = null, $data = null)
+    public function __construct($name = null, $attributes = null, $data = array())
     {
         $bDetect = true;
         if (isset($data['detectBrokenBrowsers'])) {
