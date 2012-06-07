@@ -24,11 +24,11 @@
   <active>yes</active>
  </lead>
 
- <date>2010-05-25</date>
+ <date>2012-06-07</date>
 
  <version>
-  <release>0.0.1</release>
-  <api>0.0.1</api>
+  <release>0.0.2</release>
+  <api>0.0.2</api>
  </version>
 
  <stability>
@@ -39,7 +39,8 @@
  <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
 
  <notes>
-  - First public version
+- Fix Safari bug
+- Fix compatibility with HTML_QuickForm2 2.0.0RC1
  </notes>
 
  <contents>
@@ -47,7 +48,9 @@
    <dir name="HTML">
     <dir name="QuickForm2">
      <dir name="Element">
-      <file role="php" name="BackgroundText.php" />
+      <file role="php" name="BackgroundText.php">
+       <tasks:replace from="@version@" to="version" type="package-info" />
+      </file>
      </dir>
     </dir>
    </dir>
@@ -71,7 +74,7 @@
    <package>
     <name>HTML_QuickForm2</name>
     <channel>pear.php.net</channel>
-    <min>0.5.0</min>
+    <min>2.0.0RC1</min>
    </package>
   </required>
  </dependencies>
@@ -79,6 +82,23 @@
  <phprelease />
 
  <changelog>
+
+  <release>
+   <version>
+    <release>0.0.2</release>
+    <api>0.0.2</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2012-06-07</date>
+   <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
+   <notes>
+- Fix Safari bug
+- Fix compatibility with HTML_QuickForm2 2.0.0RC1
+   </notes>
+  </release>
 
   <release>
    <version>
